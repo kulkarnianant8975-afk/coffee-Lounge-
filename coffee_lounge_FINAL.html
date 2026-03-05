@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
+<title>The Coffee Lounge — Menu</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<style>
+:root{--ink:#140a02;--bg:#faf4eb;--card:#fff9f1;--gold:#b8832a;--gold2:#daa84e;--rust:#8c3015;--txt:#2e1a08;--sub:#8a6040;--sh:rgba(20,10,2,.14);}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);font-family:'DM Sans',sans-serif;color:var(--txt);overflow-x:hidden;}
+.hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;overflow:hidden;background:#080401;}
+.hg{position:absolute;inset:0;background:radial-gradient(ellipse 60% 55% at 25% 65%,rgba(184,131,42,.2) 0%,transparent 60%),radial-gradient(ellipse 45% 40% at 80% 25%,rgba(140,48,21,.18) 0%,transparent 55%),radial-gradient(ellipse 90% 90% at 50% 50%,#120601 0%,#050200 100%);}
+.orb{position:absolute;border-radius:50%;border:1px solid rgba(184,131,42,.12);animation:orb 9s ease-in-out infinite;}
+.orb:nth-child(1){width:300px;height:300px;}.orb:nth-child(2){width:500px;height:500px;animation-delay:2s;}.orb:nth-child(3){width:700px;height:700px;animation-delay:4s;}
+@keyframes orb{0%,100%{transform:scale(1);opacity:.28;}50%{transform:scale(1.03);opacity:.55;}}
+.hi{position:relative;z-index:2;text-align:center;padding:0 28px;}
+.chip{display:inline-flex;align-items:center;gap:10px;font-size:9.5px;font-weight:500;letter-spacing:5px;text-transform:uppercase;color:var(--gold2);border:1px solid rgba(184,131,42,.3);padding:7px 22px;border-radius:100px;margin-bottom:36px;animation:up .9s ease both;}
+.logo{font-family:'Cormorant Garamond',serif;font-size:clamp(56px,13vw,100px);font-weight:300;color:#f0e6d6;line-height:.92;letter-spacing:-1px;animation:up .9s ease .15s both;}
+.logo em{font-style:italic;color:var(--gold2);display:block;}
+.tagline{font-size:10.5px;font-weight:300;letter-spacing:9px;text-transform:uppercase;color:rgba(240,230,214,.3);margin-top:20px;animation:up .9s ease .3s both;}
+.sep{display:flex;align-items:center;gap:20px;justify-content:center;margin:32px 0 22px;animation:up .9s ease .42s both;}
+.sep span{width:52px;height:1px;background:rgba(184,131,42,.35);}
+.hrs{font-size:11.5px;letter-spacing:4px;text-transform:uppercase;color:rgba(240,230,214,.28);animation:up .9s ease .5s both;}
+.scr{position:absolute;bottom:34px;left:50%;transform:translateX(-50%);z-index:2;display:flex;flex-direction:column;align-items:center;gap:10px;color:rgba(184,131,42,.4);font-size:8.5px;letter-spacing:5px;text-transform:uppercase;animation:up 1s ease .8s both;}
+.scr::after{content:'';width:1px;height:44px;background:linear-gradient(to bottom,rgba(184,131,42,.55),transparent);animation:drop 2.4s ease-in-out infinite;}
+@keyframes drop{0%,100%{height:44px;opacity:.4;}50%{height:62px;opacity:.8;}}
+@keyframes up{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+.nav{position:sticky;top:0;z-index:200;background:rgba(250,244,235,.97);backdrop-filter:blur(18px);border-bottom:1px solid rgba(184,131,42,.15);display:flex;justify-content:center;}
+.nb{font-size:10px;font-weight:500;letter-spacing:4px;text-transform:uppercase;color:var(--sub);background:none;border:none;border-bottom:2px solid transparent;padding:17px 36px;cursor:pointer;transition:color .25s,border-color .25s;text-decoration:none;display:block;}
+.nb.on,.nb:hover{color:var(--gold);border-bottom-color:var(--gold);}
+.sec{padding:76px 20px 60px;max-width:1140px;margin:0 auto;}
+.sec-head{margin-bottom:54px;}
+.eyebrow{font-size:9px;font-weight:500;letter-spacing:7px;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:16px;margin-bottom:14px;}
+.eyebrow::after{content:'';flex:1;height:1px;background:linear-gradient(to right,rgba(184,131,42,.38),transparent);}
+.sec-title{font-family:'Cormorant Garamond',serif;font-size:clamp(38px,6vw,58px);font-weight:300;color:var(--rust);line-height:1.05;}
+.sec-title em{font-style:italic;color:var(--gold);}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(268px,1fr));gap:22px;}
+.card{background:var(--card);border-radius:24px;overflow:hidden;box-shadow:0 2px 20px var(--sh);transition:transform .4s cubic-bezier(.22,.68,0,1.3),box-shadow .4s ease;opacity:0;transform:translateY(26px);}
+.card.show{opacity:1;transform:translateY(0);transition:opacity .5s ease,transform .5s ease,box-shadow .4s ease;}
+.card:hover{transform:translateY(-10px) scale(1.012) !important;box-shadow:0 20px 55px rgba(20,10,2,.2);}
+.ci{position:relative;height:200px;overflow:hidden;}
+.ci-bg{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:86px;transition:transform .65s ease;position:absolute;inset:0;}
+.card:hover .ci-bg{transform:scale(1.1);}
+.ci img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0;z-index:2;transition:transform .65s ease;}
+.card:hover .ci img{transform:scale(1.1);}
+.ci-ov{position:absolute;inset:0;z-index:3;background:linear-gradient(to top,rgba(8,4,1,.62) 0%,rgba(8,4,1,.1) 45%,transparent 70%);}
+.badge{position:absolute;top:13px;left:13px;z-index:4;font-size:8.5px;font-weight:500;letter-spacing:3px;text-transform:uppercase;background:rgba(8,4,1,.5);color:rgba(240,230,214,.75);padding:4px 12px;border-radius:100px;backdrop-filter:blur(6px);}
+.price{position:absolute;bottom:13px;right:13px;z-index:4;font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:600;background:var(--gold);color:#fff;padding:3px 16px;border-radius:100px;box-shadow:0 3px 12px rgba(0,0,0,.32);}
+.cb{padding:20px 22px 24px;}
+.cn{font-family:'Cormorant Garamond',serif;font-size:21px;font-weight:600;color:var(--ink);line-height:1.2;margin-bottom:6px;}
+.cd{font-size:12.5px;font-weight:300;color:var(--sub);line-height:1.65;}
+.band{background:linear-gradient(140deg,#100501,#1e0a02,#2c1004);padding:64px 24px;text-align:center;position:relative;overflow:hidden;}
+.band::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 65% 65% at 50% 50%,rgba(184,131,42,.11),transparent 68%);}
+.bt{font-family:'Cormorant Garamond',serif;font-size:clamp(26px,5.5vw,46px);font-weight:300;color:#f0e6d6;position:relative;line-height:1.15;}
+.bt em{font-style:italic;color:var(--gold2);}
+.bs{font-size:10px;letter-spacing:6px;text-transform:uppercase;color:rgba(240,230,214,.3);margin-top:12px;position:relative;}
+.qr-wrap{background:linear-gradient(160deg,#080401,#140702,#1e0d03);padding:64px 24px 72px;text-align:center;position:relative;overflow:hidden;}
+.qr-wrap::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:80px;height:2px;background:linear-gradient(to right,transparent,var(--gold),transparent);}
+.qr-wrap::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 55% 60% at 50% 50%,rgba(184,131,42,.1),transparent 65%);}
+.qt{font-family:'Cormorant Garamond',serif;font-size:clamp(26px,5vw,38px);font-weight:300;color:#f0e6d6;position:relative;z-index:1;margin-bottom:6px;}
+.qt em{font-style:italic;color:var(--gold2);}
+.qs{font-size:10px;letter-spacing:5px;text-transform:uppercase;color:rgba(240,230,214,.3);margin-bottom:36px;position:relative;z-index:1;}
+#qrbox{display:inline-block;background:#fff;padding:18px;border-radius:20px;box-shadow:0 10px 48px rgba(0,0,0,.55);position:relative;z-index:1;margin-bottom:22px;}
+#qrbox canvas,#qrbox img{display:block!important;}
+.qr-url{font-size:12px;color:rgba(218,168,78,.7);letter-spacing:.5px;max-width:420px;margin:0 auto 24px;word-break:break-all;line-height:1.6;position:relative;z-index:1;}
+.dl-btn{display:inline-flex;align-items:center;gap:8px;padding:12px 30px;border-radius:100px;border:1px solid rgba(184,131,42,.4);background:transparent;color:var(--gold2);font-family:'DM Sans',sans-serif;font-size:10.5px;letter-spacing:3px;text-transform:uppercase;cursor:pointer;transition:background .25s;position:relative;z-index:1;}
+.dl-btn:hover{background:rgba(184,131,42,.13);}
+footer{background:#050200;padding:48px 24px;text-align:center;}
+.fl{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300;color:#f0e6d6;letter-spacing:1px;margin-bottom:10px;}
+.fl em{font-style:italic;color:var(--gold2);}
+.fn{font-size:10.5px;font-weight:300;letter-spacing:3px;text-transform:uppercase;color:rgba(240,230,214,.22);}
+@media(max-width:580px){.grid{grid-template-columns:1fr 1fr;gap:12px;}.ci{height:138px;}.ci-bg{font-size:58px;}.cb{padding:12px 13px 15px;}.cn{font-size:16px;}.cd{display:none;}.nb{padding:14px 18px;font-size:9px;letter-spacing:2px;}}
+@media(max-width:360px){.grid{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+
+<section class="hero">
+  <div class="hg"></div>
+  <div class="orb"></div><div class="orb"></div><div class="orb"></div>
+  <div class="hi">
+    <div class="chip">✦ Digital Menu ✦</div>
+    <h1 class="logo">The<em>Coffee Lounge</em></h1>
+    <p class="tagline">Artisan · Handcrafted · Indulgent</p>
+    <div class="sep"><span></span>
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="rgba(184,131,42,.65)"><path d="M18.5 3H6c-1.1 0-2 .9-2 2v5.71c0 3.83 2.95 7.18 6.78 7.29 3.96.12 7.22-3.06 7.22-7v-1h.5c1.93 0 3.5-1.57 3.5-3.5S20.43 3 18.5 3zM16 5v3H6V5h10zm2.5 3H18V5h.5c.83 0 1.5.67 1.5 1.5S19.33 8 18.5 8zM4 19h16v2H4v-2z"/></svg>
+    <span></span></div>
+    <p class="hrs">Open · 10 AM – 11 PM</p>
+  </div>
+  <div class="scr">scroll</div>
+</section>
+
+<nav class="nav">
+  <a class="nb on" href="#pastry">Pastry &amp; Cake</a>
+  <a class="nb" href="#waffels">Waffels</a>
+</nav>
+
+<section id="pastry" class="sec">
+  <div class="sec-head"><div class="eyebrow">Sweet Bites</div><h2 class="sec-title">Pastry &amp; <em>Cake</em></h2></div>
+  <div class="grid">
+    <div class="card"><div class="ci"><div class="ci-bg" style="background:linear-gradient(145deg,#3a1600,#7a3200)">🧁</div><img src="https://images.unsplash.com/photo-1607958996333-41aef7caefaa?w=480&fit=crop&q=82&auto=format" loading="lazy" onerror="this.style.display='none'" alt=""><div class="ci-ov"></div><span class="badge">Bakery</span><span class="price">₹30</span></div><div class="cb"><div class="cn">Chocochips Muffin</div><div class="cd">Soft cloud-like muffin loaded with Belgian chocolate chips, baked golden.</div></div></div>
+    <div class="card"><div class="ci"><div class="ci-bg" style="background:linear-gradient(145deg,#2c1000,#682e00)">🥐</div><img src="https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=480&fit=crop&q=82&auto=format" loading="lazy" onerror="this.style.display='none'" alt=""><div class="ci-ov"></div><span class="badge">Bakery</span><span class="price">₹60</span></div><div class="cb"><div class="cn">Chocolate Croissant</div><div class="cd">Flaky buttery layers with a rich dark chocolate centre, baked gloriously golden.</div></div></div>
+    <div class="card"><div class="ci"><div class="ci-bg" style="background:linear-gradient(145deg,#5a3818,#9e5e26)">🥐</div><img src="https://images.unsplash.com/photo-1549903072-7e6e0bedb7fb?w=480&fit=crop&q=82&auto=format" loading="lazy" onerror="this.style.display='none'" alt=""><div class="ci-ov"></div><span class="badge">Classic</span><span class="price">₹50</span></div><div class="cb"><div class="cn">Butter Croissant</div><div class="cd">Classic shatteringly crisp crust with a pillowy melt-in-mouth layered interior.</div></div></div>
+    <div class="card"><div class="ci"><div class="ci-bg" style="background:linear-gradient(145deg,#1a0700,#4a1c00)">🍫</div><img src="https://images.unsplash.com/photo-1606313564200-e75d5e30476c?w=480&fit=crop&q=82&auto=format" loading="lazy" onerror="this.style.display='none'" alt=""><div class="ci-ov"></div><span class="badge">Signature</span><span class="price">₹80</span></div><div class="cb"><div class="cn">Choco Mocha Brownie</div><div class="cd">Dense fudgy brownie with a double espresso hit — the ultimate coffee companion.</div></div></div>
+    <div class="card"><div class="ci"><div class="ci-bg" style="background:linear-gradient(145deg,#200900,#501600)">🍮</div><img src="https://images.unsplash.com/photo-1511381939415-e44a810e3b00?w=480&fit=crop&q=82&auto=format" loading="lazy" onerror="this.style.display='none'" alt=""><div class="ci-ov"></div><span class="badge">Dessert</span><span class="price">₹80</span></div><div class="cb"><div class="cn">Chocolate Mousse</div><div class="cd">Silky airy mousse whipped from finest dark chocolate — melts on your tongue.</div></div></div>
+    <div class="card"><div class="ci"><div class="ci-bg" style="background:linear-gradient(145deg,#160028,#420060)">🫐</div><img src="https://images.unsplash.com/photo-1565958011703-44f9829ba187?w=480&fit=crop&q=82&auto=format" loading="lazy" onerror="this.style.display='none'" alt=""><div class="ci-ov"></div><span class="badge">Pastry</span><span class="price">₹90</span></div><div class="cb"><div class="cn">Blueberry Cheese Pastry</div><div class="cd">Velvety cream nestled in flaky pastry, crowned with fresh blueberry compote.</div></div></div>
+    <div class="card"><div class="ci"><div class="ci-bg" style="background:linear-gradient(145deg,#180400,#4a0e00)">🎂</div><img src="https://images.unsplash.com/photo-1571115177098-24ec42ed204d?w=480&fit=crop&q=82&auto=format" loading="lazy" onerror="this.style.display='none'" alt=""><div class="ci-ov"></div><span class="badge">Signature</span><span class="price">₹100</span></div><div class="cb"><div class="cn">Chocolate Truffle Pastry</div><div class="cd">Moist chocolate sponge draped in a glossy luxurious truffle ganache.</div></div></div>
+    <div class="card"><div class="ci"><div class="ci-bg" style="background:linear-gradient(145deg,#381c00,#764000)">🍰</div><img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=480&fit=crop&q=82&auto=format" loading="lazy" onerror="this.style.display='none'" alt=""><div class="ci-ov"></div><span class="badge">Pastry</span><span class="price">₹90</span></div><div class="cb"><div class="cn">Biscoff Cheese Pastry</div><div class="cd">Silky cream cheese on a caramelised Biscoff crumb base — comfort in every bite.</div></div></div>
+    <div class="card"><div class="ci"><div class="ci-bg" style="background:linear-gradient(145deg,#360000,#740000)">🍰</div><img src="https://images.unsplash.com/photo-1464349153735-7db50ed83c84?w=480&fit=crop&q=82&auto=format" loading="lazy" onerror="this.style.display='none'" alt=""><div class="ci-ov"></div><span class="badge">Classic</span><span class="price">₹90</span></div><div class="cb"><div class="cn">Red Velvet Pastry</div><div class="cd">Vibrant crimson layers with a signature tangy cream cheese frosting.</div></div></div>
+    <div class="card"><div class="ci"><div class="ci-bg" style="background:linear-gradient(145deg,#180700,#481e00)">🍫</div><img src="https://images.unsplash.com/photo-1589375722948-f4b0fead5c83?w=480&fit=crop&q=82&auto=format" loading="lazy" onerror="this.style.display='none'" alt=""><div class="ci-ov"></div><span class="badge">Bestseller ⭐</span><span class="price">₹100</span></div><div class="cb"><div class="cn">Nutella Brownie</div><div class="cd">Decadent fudge brownie with thick ribbons of Nutella swirled through every layer.</div></div></div>
+  </div>
+</section>
+
+<div class="band">
+  <div class="bt">Crispy outside. <em>Magic inside.</em></div>
+  <div class="bs">Our signature waffels — made fresh to order</div>
+</div>
+
+<section id="waffels" class="sec">
+  <div class="sec-head"><div class="eyebrow">Made Fresh</div><h2 class="sec-title">Our <em>Waffels</em></h2></div>
+  <div class="grid">
+    <div class="card"><div class="ci"><div class="ci-bg" style="background:linear-gradient(145deg,#583600,#9e6200)">🧇</div><img src="https://images.unsplash.com/photo-1562376552-0d160a2f238d?w=480&fit=crop&q=82&auto=format" loading="lazy" onerror="this.style.display='none'" alt=""><div class="ci-ov"></div><span class="badge">Classic</span><span class="price">₹100</span></div><div class="cb"><div class="cn">Honey Butter</div><div class="cd">Warm golden waffle drizzled with wild honey and whipped cream butter.</div></div></div>
+    <div class="card"><div class="ci"><div class="ci-bg" style="background:linear-gradient(145deg,#3a2000,#764400)">🧇</div><img src="https://images.unsplash.com/photo-1551615593-ef5fe247e8f7?w=480&fit=crop&q=82&auto=format" loading="lazy" onerror="this.style.display='none'" alt=""><div class="ci-ov"></div><span class="badge">Nutty</span><span class="price">₹120</span></div><div class="cb"><div class="cn">Nut Butter</div><div class="cd">Crispy waffle smothered with rich nut butter and toasted crushed nuts.</div></div></div>
+    <div class="card"><div class="ci"><div class="ci-bg" style="background:linear-gradient(145deg,#260f00,#603000)">🧇</div><img src="https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=480&fit=crop&q=82&auto=format" loading="lazy" onerror="this.style.display='none'" alt=""><div class="ci-ov"></div><span class="badge">Fan Fav ❤️</span><span class="price">₹140</span></div><div class="cb"><div class="cn">Nutella</div><div class="cd">Fluffy waffle buried under a generous glossy layer of Nutella with icing sugar.</div></div></div>
+    <div class="card"><div class="ci"><div class="ci-bg" style="background:linear-gradient(145deg,#160500,#461600)">🧇</div><img src="https://images.unsplash.com/photo-1598214886806-c91b3445ed9e?w=480&fit=crop&q=82&auto=format" loading="lazy" onerror="this.style.display='none'" alt=""><div class="ci-ov"></div><span class="badge">Premium</span><span class="price">₹160</span></div><div class="cb"><div class="cn">Belgium Chocolate</div><div class="cd">Pure Belgian chocolate sauce poured over a crispy waffle — rich and indulgent.</div></div></div>
+    <div class="card"><div class="ci"><div class="ci-bg" style="background:linear-gradient(145deg,#0b0000,#360500)">🍫</div><img src="https://images.unsplash.com/photo-1624353365286-3f8d62daad51?w=480&fit=crop&q=82&auto=format" loading="lazy" onerror="this.style.display='none'" alt=""><div class="ci-ov"></div><span class="badge">Bestseller ⭐</span><span class="price">₹180</span></div><div class="cb"><div class="cn">Chocolate Overload</div><div class="cd">Ganache, sauce, and choco chips — three chocolate layers on one waffle.</div></div></div>
+    <div class="card"><div class="ci"><div class="ci-bg" style="background:linear-gradient(145deg,#160005,#440015)">🍪</div><img src="https://images.unsplash.com/photo-1606313564200-e75d5e30476c?w=480&fit=crop&q=82&auto=format" loading="lazy" onerror="this.style.display='none'" alt=""><div class="ci-ov"></div><span class="badge">Special</span><span class="price">₹150</span></div><div class="cb"><div class="cn">KitKat Oreo</div><div class="cd">Crunchy KitKat shards and Oreo crumble piled on a chocolate-drizzled waffle.</div></div></div>
+    <div class="card"><div class="ci"><div class="ci-bg" style="background:linear-gradient(145deg,#160300,#461000)">🍫</div><img src="https://images.unsplash.com/photo-1559181567-c3190ca9d222?w=480&fit=crop&q=82&auto=format" loading="lazy" onerror="this.style.display='none'" alt=""><div class="ci-ov"></div><span class="badge">Indulgent</span><span class="price">₹160</span></div><div class="cb"><div class="cn">Brownie</div><div class="cd">Warm fudge brownie chunks on a crispy waffle with a warm chocolate drizzle.</div></div></div>
+  </div>
+</section>
+
+<div class="qr-wrap">
+  <h3 class="qt">Scan to <em>Share</em></h3>
+  <p class="qs">Print &amp; place on your tables</p>
+  <div id="qrbox"></div>
+  <p class="qr-url" id="liveurl"></p>
+  <button class="dl-btn" onclick="dlQR()">⬇ &nbsp;Download QR Code</button>
+</div>
+
+<footer>
+  <div class="fl">The <em>Coffee Lounge</em></div>
+  <div class="fn">Open 10 AM – 11 PM &nbsp;·&nbsp; All prices inclusive of taxes</div>
+</footer>
+
+<script>
+(function(){
+  const url=window.location.href.split('#')[0];
+  document.getElementById('liveurl').textContent=url;
+  new QRCode(document.getElementById('qrbox'),{text:url,width:200,height:200,colorDark:'#080401',colorLight:'#ffffff',correctLevel:QRCode.CorrectLevel.H});
+})();
+function dlQR(){const c=document.querySelector('#qrbox canvas');if(!c)return;const a=document.createElement('a');a.download='coffee-lounge-qr.png';a.href=c.toDataURL('image/png');a.click();}
+const nbs=document.querySelectorAll('.nb');
+['pastry','waffels'].forEach(id=>{new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){nbs.forEach(n=>n.classList.remove('on'));const a=document.querySelector(`.nb[href="#${id}"]`);if(a)a.classList.add('on');}});},{threshold:.25}).observe(document.getElementById(id));});
+nbs.forEach(n=>n.addEventListener('click',e=>{e.preventDefault();document.querySelector(n.getAttribute('href'))?.scrollIntoView({behavior:'smooth'});}));
+const io=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('show');io.unobserve(e.target);}});},{threshold:.08,rootMargin:'0px 0px -30px 0px'});
+document.querySelectorAll('.card').forEach((c,i)=>{c.style.transitionDelay=(i%4)*.08+'s';io.observe(c);});
+</script>
+</body>
+</html>
